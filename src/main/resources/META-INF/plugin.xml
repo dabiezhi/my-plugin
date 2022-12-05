@@ -1,18 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.dabiezhi.myplugin</id>
-    <name>IntelliJ Platform Plugin my-plugin</name>
+    <name>my-tiaotiao</name>
     <vendor>dabiezhi</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.dabiezhi.myplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.dabiezhi.myplugin.services.MyProjectService"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.dabiezhi.myplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <actions>
+        <!-- Add your actions here -->
+        <!-- 在此处添加你的Action -->
+        <action class="HelloWorldAction" description="Hello world">
+            <!-- 该标签表示通过快捷键触发Action，注意快捷键可能会冲突，导致功能无法被触发，更换绑定的快捷键即可 -->
+            <keyboard-shortcut first-keystroke="control shift Q" keymap="$default"/>
+        </action>
+    </actions>
 </idea-plugin>

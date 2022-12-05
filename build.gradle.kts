@@ -65,34 +65,34 @@ tasks {
         gradleVersion = properties("gradleVersion")
     }
 
-    patchPluginXml {
-        version.set(properties("pluginVersion"))
-        sinceBuild.set(properties("pluginSinceBuild"))
-        untilBuild.set(properties("pluginUntilBuild"))
-
-        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
-        pluginDescription.set(
-            file("README.md").readText().lines().run {
-                val start = "<!-- Plugin description -->"
-                val end = "<!-- Plugin description end -->"
-
-                if (!containsAll(listOf(start, end))) {
-                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
-                }
-                subList(indexOf(start) + 1, indexOf(end))
-            }.joinToString("\n").let { markdownToHTML(it) }
-        )
-
-        // Get the latest available change notes from the changelog file
-        changeNotes.set(provider {
-            with(changelog) {
-                renderItem(
-                    getOrNull(properties("pluginVersion")) ?: getLatest(),
-                    Changelog.OutputType.HTML,
-                )
-            }
-        })
-    }
+//    patchPluginXml {
+//        version.set(properties("pluginVersion"))
+//        sinceBuild.set(properties("pluginSinceBuild"))
+//        untilBuild.set(properties("pluginUntilBuild"))
+//
+//        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+//        pluginDescription.set(
+//            file("README.md").readText().lines().run {
+//                val start = "<!-- Plugin description -->"
+//                val end = "<!-- Plugin description end -->"
+//
+//                if (!containsAll(listOf(start, end))) {
+//                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+//                }
+//                subList(indexOf(start) + 1, indexOf(end))
+//            }.joinToString("\n").let { markdownToHTML(it) }
+//        )
+//
+//        // Get the latest available change notes from the changelog file
+//        changeNotes.set(provider {
+//            with(changelog) {
+//                renderItem(
+//                    getOrNull(properties("pluginVersion")) ?: getLatest(),
+//                    Changelog.OutputType.HTML,
+//                )
+//            }
+//        })
+//    }
 
     // Configure UI tests plugin
     // Read more: https://github.com/JetBrains/intellij-ui-test-robot
