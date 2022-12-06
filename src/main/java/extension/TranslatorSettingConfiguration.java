@@ -1,25 +1,26 @@
 package extension;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.ui.JBColor;
-import org.jetbrains.annotations.Nullable;
-import util.TranslatorUtils;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.*;
+
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.ui.JBColor;
+
+import org.jetbrains.annotations.Nullable;
+
 public class TranslatorSettingConfiguration implements Configurable {
 
     private final JComponent component;
-    private final JTextField appID;
+    private final JTextField appId;
     private final JTextField securityKey;
     private final static String appIDHint = "请输入appID";
     private final static String securityKeyHint = "请输入securityKey";
-//    private final static String appIDHint = "20160728000025950";
-//    private final static String securityKeyHint = "iLQNUxz23Oli_PHaeuuL";
+    //    private final static String appIDHint = "20160728000025950";
+    //    private final static String securityKeyHint = "iLQNUxz23Oli_PHaeuuL";
 
     public TranslatorSettingConfiguration() {
         this.component = new JPanel();
@@ -27,19 +28,28 @@ public class TranslatorSettingConfiguration implements Configurable {
         this.component.setLayout(new GridLayout(15, 1));
 
         // 创建appID、securityKey文本框
-        this.appID = new JTextField();
+        this.appId = new JTextField();
         this.securityKey = new JTextField();
 
-        //设置输入框提示语
-        this.appID.setText(appIDHint);
-        this.appID.setForeground(JBColor.GRAY);
-        this.appID.addFocusListener(new TextFieldListener(this.appID, appIDHint));
+        this.appId.addFocusListener(new TextFieldListener(this.appId, appIDHint));
+        if (TranslatorSetting.getInstance().appId != null) {
+            this.appId.setText(TranslatorSetting.getInstance().appId);
+        } else {
+            //设置输入框提示语
+            this.appId.setText(appIDHint);
+            this.appId.setForeground(JBColor.GRAY);
+        }
 
-        this.securityKey.setText(securityKeyHint);
-        this.securityKey.setForeground(JBColor.GRAY);
         this.securityKey.addFocusListener(new TextFieldListener(this.securityKey, securityKeyHint));
+        if (TranslatorSetting.getInstance().securityKey != null) {
+            this.appId.setText(TranslatorSetting.getInstance().securityKey);
+        } else {
+            //设置输入框提示语
+            this.securityKey.setText(securityKeyHint);
+            this.securityKey.setForeground(JBColor.GRAY);
+        }
 
-        this.component.add(this.appID);
+        this.component.add(this.appId);
         this.component.add(this.securityKey);
     }
 
@@ -60,8 +70,10 @@ public class TranslatorSettingConfiguration implements Configurable {
 
     @Override
     public void apply() throws ConfigurationException {
-        TranslatorUtils.appid = appID.getText();
-        TranslatorUtils.securityKey = securityKey.getText();
+        //        TranslatorUtils.appid = appId.getText();
+        //        TranslatorUtils.securityKey = securityKey.getText();
+        TranslatorSetting.getInstance().appId = appId.getText();
+        TranslatorSetting.getInstance().securityKey = securityKey.getText();
     }
 
     static class TextFieldListener implements FocusListener {

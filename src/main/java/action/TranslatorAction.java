@@ -19,7 +19,7 @@ public class TranslatorAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Editor editor = e.getData(CommonDataKeys.EDITOR);
-        if (TranslatorUtils.appid == null || TranslatorUtils.securityKey == null) {
+        if (TranslatorUtils.appId == null || TranslatorUtils.securityKey == null) {
             Notifications.Bus.notify(new Notification("Print", "小天才翻译机", "请先设置appID，securityKey", NotificationType.ERROR), e.getProject());
             return;
         }

@@ -7,11 +7,13 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import extension.TranslatorSetting;
+
 public class TranslatorUtils {
 
     private final static String transAPIHost = "http://api.fanyi.baidu.com/api/trans/vip/translate";
-    public static String appid;
-    public static String securityKey;
+    public static String appId = TranslatorSetting.getInstance().appId;
+    public static String securityKey = TranslatorSetting.getInstance().securityKey;
 
     public static String getTransResult(String query, String from, String to) {
         Map<String, String> params = buildParams(query, from, to);
@@ -28,12 +30,12 @@ public class TranslatorUtils {
         params.put("q", query);
         params.put("from", from);
         params.put("to", to);
-        params.put("appid", appid);
+        params.put("appid", appId);
         // 随机数
         String salt = String.valueOf(System.currentTimeMillis());
         params.put("salt", salt);
         // 签名
-        String src = appid + query + salt + securityKey; // 加密前的原文
+        String src = appId + query + salt + securityKey; // 加密前的原文
         params.put("sign", MD5Utils.md5(src));
         return params;
     }
