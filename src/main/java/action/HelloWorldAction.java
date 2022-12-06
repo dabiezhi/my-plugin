@@ -1,17 +1,11 @@
-/**
- * Aistarfish.com Inc.
- * Copyright (c) 2017-2022 All Rights Reserved.
- */
+package action;
 
-/**
- * @author curry
- * Created by on 2022-12-05 下午5:38
- */
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+
 import org.jetbrains.annotations.NotNull;
 
 public class HelloWorldAction extends AnAction {
@@ -29,8 +23,9 @@ public class HelloWorldAction extends AnAction {
          *  本处表示在我们当前 IDE 中所打开的项目进行提示，若我们同时打开多个 IDE，其他 IDE 项目窗口中不会收到改消息。
          */
         Notifications.Bus.notify(new Notification("Print", "我的第一个插件",
-            "Hello, World" + System.currentTimeMillis(), NotificationType.INFORMATION),
-            e.getProject());
+                                                  "Hello, World" + System.currentTimeMillis(),
+                                                  NotificationType.INFORMATION),
+                                 e.getProject());
 
     }
 
