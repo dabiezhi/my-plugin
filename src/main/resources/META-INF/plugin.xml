@@ -8,6 +8,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="extension.TranslatorSetting"/>
+        <projectService serviceImplementation="extension.TranslatorCache"/>
+        <toolWindow id="Translator" anchor="right" factoryClass="extension.TranslatorToolsWindow"/>
 
         <applicationConfigurable
                 parentId="tools"
