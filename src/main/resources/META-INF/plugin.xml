@@ -7,25 +7,14 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="extension.TranslatorSetting"/>
-
-        <applicationConfigurable
-                parentId="tools"
-                instance="extension.TranslatorSettingConfiguration"
-                id="org.example.TranslatorSettingConfiguration"
-                displayName="Translator"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
         <!-- 在此处添加你的Action -->
-        <!--        <action class="action.HelloWorldAction" description="Hello world">-->
-        <!--            &lt;!&ndash; 该标签表示通过快捷键触发Action，注意快捷键可能会冲突，导致功能无法被触发，更换绑定的快捷键即可 &ndash;&gt;-->
-        <!--            <keyboard-shortcut first-keystroke="control shift Q" keymap="$default"/>-->
-        <!--        </action>-->
-        <action id="translator" class="action.TranslatorAction" description="Translate" text="Translate">
+        <action class="action.HelloWorldAction" description="Hello world">
+            <!-- 该标签表示通过快捷键触发Action，注意快捷键可能会冲突，导致功能无法被触发，更换绑定的快捷键即可 -->
             <keyboard-shortcut first-keystroke="control shift Q" keymap="$default"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
